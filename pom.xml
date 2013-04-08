@@ -2,13 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.airlift</groupId>
-    <artifactId>airlift</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>airlift-rack</artifactId>
     <version>0.76-SNAPSHOT</version>
-    <name>airlift</name>
-    <description>Airlift</description>
-    <url>http://github.com/airlift/airlift</url>
+    <packaging>pom</packaging>
+
+    <name>airlift-rack</name>
+    <description>Airlift Rack</description>
+    <url>https://github.com/airlift/airlift-rack</url>
 
     <parent>
         <groupId>io.airlift</groupId>
@@ -23,8 +23,8 @@
         <air.check.fail-all>false</air.check.fail-all>
         <air.check.fail-basic>true</air.check.fail-basic>
 
-        <dep.airlift.version>0.76-SNAPSHOT</dep.airlift.version>
-        <dep.packaging.version>${dep.airlift.version}</dep.packaging.version>
+        <dep.airlift.version>0.75</dep.airlift.version>
+        <dep.airlift-rack.version>0.76-SNAPSHOT</dep.airlift-rack.version>
     </properties>
 
     <organization>
@@ -33,59 +33,18 @@
     <licenses>
         <license>
             <name>Apache License 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-            <distribution>repo</distribution>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
 
-    <developers>
-        <!-- see git log -->
-    </developers>
-
-    <scm>
-        <connection>scm:git:git://github.com/airlift/airlift.git</connection>
-        <developerConnection>scm:git:git@github.com:airlift/airlift.git</developerConnection>
-        <url>http://github.com/airlift/airlift/tree/master</url>
-      <tag>HEAD</tag>
-  </scm>
-
     <modules>
         <!-- components -->
-        <module>bootstrap</module>
-        <module>configuration</module>
-        <module>dbpool</module>
-        <module>discovery</module>
-        <module>event</module>
-        <module>http-client</module>
-        <module>http-server</module>
-        <module>jaxrs</module>
-        <module>jmx-http-rpc</module>
-        <module>jmx-http</module>
-        <module>jmx</module>
-        <module>json</module>
-        <module>launcher</module>
-        <module>log</module>
-        <module>log-manager</module>
-        <module>node</module>
-        <module>packaging</module>
         <module>rack-launcher</module>
         <module>rack-packaging</module>
         <module>rack</module>
-        <module>stats</module>
-        <module>testing</module>
-        <module>trace-token</module>
-        <module>units</module>
 
-        <!-- base poms -->
+        <!-- base pom -->
         <module>rack-server-base</module>
-
-        <!-- skeleton / sample code -->
-        <module>skeleton-server</module>
-        <module>sample-server</module>
-
-        <!-- archetype generators. Keep those last! -->
-        <module>skeleton-server-archetype-builder</module>
-        <module>sample-server-archetype-builder</module>
     </modules>
 
     <dependencyManagement>
@@ -164,14 +123,6 @@
 
             <dependency>
                 <groupId>io.airlift</groupId>
-                <artifactId>launcher</artifactId>
-                <version>${dep.airlift.version}</version>
-                <classifier>bin</classifier>
-                <type>tar.gz</type>
-            </dependency>
-
-            <dependency>
-                <groupId>io.airlift</groupId>
                 <artifactId>log</artifactId>
                 <version>${dep.airlift.version}</version>
             </dependency>
@@ -190,14 +141,8 @@
 
             <dependency>
                 <groupId>io.airlift</groupId>
-                <artifactId>packaging</artifactId>
-                <version>${dep.airlift.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.airlift</groupId>
                 <artifactId>rack-launcher</artifactId>
-                <version>${dep.airlift.version}</version>
+                <version>${dep.airlift-rack.version}</version>
                 <classifier>bin</classifier>
                 <type>tar.gz</type>
             </dependency>
@@ -205,13 +150,13 @@
             <dependency>
                 <groupId>io.airlift</groupId>
                 <artifactId>rack-packaging</artifactId>
-                <version>${dep.airlift.version}</version>
+                <version>${dep.airlift-rack.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>io.airlift</groupId>
                 <artifactId>rack</artifactId>
-                <version>${dep.airlift.version}</version>
+                <version>${dep.airlift-rack.version}</version>
             </dependency>
 
             <dependency>
@@ -291,7 +236,6 @@
                 <artifactId>jruby-complete</artifactId>
                 <version>1.6.2</version>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
 
@@ -299,7 +243,7 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>io.airlift</groupId>
+                    <groupId>com.proofpoint.platform</groupId>
                     <artifactId>bundler-packaging-plugin</artifactId>
                     <version>1.1</version>
                 </plugin>
@@ -323,6 +267,7 @@
             </plugins>
         </pluginManagement>
     </build>
+
     <profiles>
         <profile>
             <id>airlift-release</id>
